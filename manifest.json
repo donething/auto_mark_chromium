@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "Auto Mark",
+  "version": "1.2",
+  "description": "当关闭指定网站时，AutoMark会自动为你添加该页面到书签栏",
+  "icons": {
+    "16": "icons/bookmark_16.png",
+    "32": "icons/bookmark_32.png",
+    "48": "icons/bookmark_48.png",
+    "128": "icons/bookmark_128.png"
+  },
+  "browser_action": {
+    "name": "添加网址前缀",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/utils.js",
+      "js/bookmark.js",
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "bookmarks",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "commands": {
+    "toggle-feature-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "快速保存书签"
+    }
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

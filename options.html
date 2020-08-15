@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>备份与恢复 - Auto Mark</title>
+  <link rel="stylesheet" type="text/css" href="css/antd.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div id="app" class="options">
+  <a-row type="flex" class="c-row" justify="space-between">
+    <strong>chrome storage存储的内容</strong>
+  </a-row>
+  <a-row type="flex" class="c-row" justify="space-between">
+    <a-textarea id="urls-prefix" v-model="storedDataStr" rows="15"
+                placeholder="http://www.runoob.com/javascript"/>
+  </a-row>
+  <a-row type="flex" class="c-row">
+    <a-button type="primary" @click="loadStorage" size="small">导入输入框的数据</a-button>
+    <a-button type="primary" @click="downStorage" size="small">保存数据到本地</a-button>
+    <a-button type="danger" @click="clearStorage" size="small">清空存储的数据</a-button>
+    <a-switch @change="formatDataStr" size="small"></a-switch>
+  </a-row>
+</div>
+<script src="js/vue.min.js"></script>
+<script src="js/antd.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="options.js"></script>
+</body>
+</html>
