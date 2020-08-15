@@ -6,7 +6,7 @@ Chromium扩展，用于自动添加书签
 
 1. 打开网页后，点击右上角扩展的图标来添加网址前缀
 
-1. 区分网址的依据是：域名+路径，比如http://www.runoob.com、http://www.runoob.com/python3、http://www.runoob.com/bootstrap 是3个不同的网址前缀，保存的3个书签都可共存
+1. 区分网址的依据是：域名+路径，比如 http://www.runoob.com 、 http://www.runoob.com/python3 、 http://www.runoob.com/bootstrap 是3个不同的网址前缀，保存的3个书签都可共存
 
 1. 关闭标签或使用快捷键 Ctrl+Shift+S 保存网址
 
