@@ -14,10 +14,15 @@ new Vue({
     },
     loadStorage() {
       this.antdConfirm("确认导入输入框的数据", this.storedDataStr, () => {
-        this.clearStorage(false);
-        Utils.Storage.set(JSON.parse(this.storedDataStr), () =>
-          this.$message.success("已导入数据"))
-      });
+        try {
+          let obj = JSON.parse(this.storedDataStr);
+          this.clearStorage(false);
+          chrome.storage.sync.set(obj, this.$message.success("已导入数据"))
+        } catch (e) {
+          console.log("导入数据失败，无法解析json文本：", e)
+          this.$message.error("无法解析json，未成功保存数据")
+        }
+      })
     },
     // 是否格式化，status为true表示格式化，为false表示恢复为格式化前的字符串
     formatDataStr(status) {
