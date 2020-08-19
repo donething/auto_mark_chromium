@@ -93,6 +93,7 @@ class Bookmark {
   static #markUrl(tab, urlPre) {
     // 判断文件夹下是否存在前缀下的书签，若无则新建；若有则更新
     chrome.bookmarks.getChildren(this.#folderID, bookmarks => {
+      // 没有找到书签时不能return，要在后面添加新书签
       if (!bookmarks) bookmarks = []
       for (let bookmark of bookmarks) {
         if (bookmark.url.indexOf(urlPre) === 0) {
