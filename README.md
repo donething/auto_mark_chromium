@@ -1,6 +1,6 @@
 # auto_mark_chromium
 
-Chromium扩展，用于自动添加书签
+Chromium扩展，用于添加网址前缀后，关闭对应网页时会自动添加书签到"AutoMark"文件夹
 
 ## 使用说明
 
@@ -8,7 +8,9 @@ Chromium扩展，用于自动添加书签
 
 1. 区分网址的依据是：域名+路径，比如 http://www.runoob.com 、 http://www.runoob.com/python3 、 http://www.runoob.com/bootstrap 是3个不同的网址前缀，保存的3个书签都可共存
 
-1. 关闭标签或使用快捷键 Ctrl+Shift+S 保存网址
+1. 注意：上面情况中由于"http://www.runoob.com"的范围更大，如果添加了该网址前缀，可能会导致后面的网址前缀无效，所以不要同时存在不一样范围大小的网址前缀
+
+1. 设置完成，当关闭标签或使用快捷键 Ctrl+Shift+S 保存自动保存当前网页的书签
 
 1. 注意以下两种情况扩展无法进行自动保存，请提前用快捷键保存
     1. 在标签内跳转到其它网址时，此时无法捕获标签关闭事件而无法保存网址
@@ -29,3 +31,4 @@ Chromium扩展，用于自动添加书签
 
 ## 开发说明
 关键代码放在 js/bookmark.js 中
+是否添加/更新书签的判断在markUrl()方法中
