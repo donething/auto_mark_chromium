@@ -34,7 +34,7 @@ class Bookmark {
     // 如果没有保存tab的ID，就不需要保存书签
     if (!tab) {
       console.log("tabs记录中没有当前tab，可能是在本扩展安装之前才打开的tab")
-      Utils.notify("操作未完成", "可能是在本扩展安装之前打开的标签，请刷新页面");
+      // Utils.notify("操作未完成", "可能是在本扩展安装之前打开的标签，请刷新页面");
       return
     }
 
