@@ -39,9 +39,8 @@ class Bookmark {
     }
 
     // 读取chromium storage中的网址前缀urls_pre，判断tab.url是否能匹配网址前缀
-    Utils.Storage.get({urls_pre: []}, data => {
-      console.log("所有的网址前缀", data.urls_pre)
-      let urlsPre = data.urls_pre
+    this.readUrlsPre(urlsPre => {
+      console.log("所有的网址前缀", urlsPre)
       // existURLPre匹配到tab.url的网址前缀，若不为""则需要保存书签
       let existURLPre = ""
       for (let urlPre of urlsPre) {
@@ -66,22 +65,51 @@ class Bookmark {
   }
 
   /**
-   * 向chromium storage中添加网址前缀
-   * @param url 网址前缀
+   * 在当前网址已被添加进了网址前缀列表时，在扩展图标添加角标"✓"
+   * @param url 当前网页地址
    */
-  static addURLPre(url) {
-    // 从storage中读取所有网址前缀，判断是否已存在，不存在则push进去后再保存
-    Utils.Storage.get({urls_pre: []}, data => {
-      let urlsPre = data.urls_pre
+  static signIfUreHadAdded(url) {
+    chrome.browserAction.setBadgeText({text: ""});
+    if (!url) {
+      console.log("当前tab的URL为空，无法设置扩展图标的角标：", url)
+      return
+    }
+    this.readUrlsPre(urlsPre => {
       for (let urlPre of urlsPre) {
         // 存在则直接返回
-        if (urlPre.url_pre === url) return
+        if (url.indexOf(urlPre.url_pre) >= 0) {
+          this.setBadge()
+          return
+        }
+      }
+    })
+  }
+
+  /**
+   * 当当前网址已在网址前缀列表时，在扩展图标中添加角标
+   */
+  static setBadge() {
+    chrome.browserAction.setBadgeText({text: "✓"});
+    chrome.browserAction.setBadgeBackgroundColor({color: [25, 135, 0, 250]});
+  }
+
+  /**
+   * 向chromium storage中添加网址前缀
+   * @param newUrlPre 将添加的网址前缀
+   */
+  static addURLPre(newUrlPre) {
+    // 从storage中读取所有网址前缀，判断是否已存在，不存在则push进去后再保存
+    this.readUrlsPre(urlsPre => {
+      for (let urlPre of urlsPre) {
+        // 存在则直接返回
+        if (urlPre.url_pre === newUrlPre) return
       }
       // 添加网址前缀项
-      let item = Utils.Storage.newURLPreItem(url)
+      let item = Utils.Storage.newURLPreItem(newUrlPre)
       urlsPre.push(item)
-      Utils.Storage.set({urls_pre: urlsPre}, () => {
+      this.writeUrlsPre(urlsPre, () => {
         console.log(`网址前缀添加完成：`, item)
+        this.setBadge()
       })
     })
   }
@@ -138,6 +166,27 @@ class Bookmark {
       }
       console.log("创建书签（夹）成功：", bookmark.id, bookmark.title);
       if (success && typeof success === "function") success(bookmark)
+    })
+  }
+
+  /**
+   * 从chromium storage从读取网址前缀数组
+   * @param callback (array) 读取完成的回调，回调时会传递一个网址前缀的数组
+   */
+  static readUrlsPre(callback) {
+    Utils.Storage.get({urls_pre: []}, data => {
+      callback(data.urls_pre)
+    })
+  }
+
+  /**
+   * 将网址前缀信息写入chromium storage
+   * @param data 要写入的网址前缀数组
+   * @param callback 写入成功的回调，无参
+   */
+  static writeUrlsPre(data, callback) {
+    Utils.Storage.set({urls_pre: data}, () => {
+      callback()
     })
   }
 }
