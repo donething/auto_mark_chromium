@@ -1,0 +1,34 @@
+body {
+    color: #555;
+    background: #F8F8F5;
+}
+
+#app {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.do-urlpre {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: space-between;
+}
+
+/* 网址前缀，太长的省略 */
+.do-urlpre-url {
+    display: inline-block;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.do-storage {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.do-row {
+    display: flex;
+    flex-flow: row nowrap;
+}

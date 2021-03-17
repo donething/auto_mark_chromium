@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener(details => {
 })
 
 // chrome.tabs.onRemoved()的回调参数removeInfo提供的信息太少，需要在此手动记录标签信息：title、url
-// 注意：此事件将调用3次，只选状态为"complete"的
+// 注意：此事件将调用2次，只选状态为"complete"的
 chrome.tabs.onUpdated.addListener((tabId, chgInfo, tab) => {
   if (chgInfo.status === "complete") {
     Bookmark.tabsInfo[tabId] = {title: tab.title, url: tab.url}

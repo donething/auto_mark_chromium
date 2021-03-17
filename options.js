@@ -2,34 +2,51 @@ new Vue({
   el: '#app',
   data() {
     return {
-      storedDataStr: ""   // storedData被JSON.stringify()的数据，string类型
-    }
+      // 收藏的网址前缀
+      urlsPre: [],
+      // storedData被JSON.stringify()的数据，string类型
+      storedDataStr: ""
+    };
   },
   methods: {
     // 打开选项页时初始化数据
     init() {
-      Utils.Storage.get(null, (data) => {
-        this.storedDataStr = JSON.stringify(data)
-      })
+      Utils.Storage.get(null, data => {
+        this.urlsPre = data.urls_pre;
+        this.storedDataStr = JSON.stringify(data);
+      });
     },
+    // 导入 chromium 存储的数据
     loadStorage() {
       this.antdConfirm("确认导入输入框的数据", this.storedDataStr, () => {
         try {
           let obj = JSON.parse(this.storedDataStr);
           this.clearStorage(false);
-          chrome.storage.sync.set(obj, this.$message.success("已导入数据"))
+          chrome.storage.sync.set(obj, this.$message.success("已导入数据"));
         } catch (e) {
-          console.log("导入数据失败，无法解析json文本：", e)
-          this.$message.error("无法解析json，未成功保存数据")
+          console.log("导入数据失败，无法解析json文本：", e);
+          this.$message.error("无法解析json，未成功保存数据");
         }
-      })
+      });
     },
+    // 移除网址前缀
+    removeURLPre(urlPre) {
+      this.antdConfirm("确认移除网址前缀", urlPre, () => {
+        let index = this.urlsPre.findIndex(e => e.url_pre === urlPre);
+        this.urlsPre.splice(index, 1);
+        Utils.Storage.set({urls_pre: this.urlsPre}, () => {
+          this.$message.info("成功移除了该网址前缀");
+          this.storedDataStr = JSON.stringify(this.urlsPre);
+        });
+      });
+    },
+
     // 是否格式化，status为true表示格式化，为false表示恢复为格式化前的字符串
     formatDataStr(status) {
       if (status === true) {
-        this.storedDataStr = JSON.stringify(JSON.parse(this.storedDataStr), null, 2)
+        this.storedDataStr = JSON.stringify(JSON.parse(this.storedDataStr), null, 2);
       } else {
-        this.storedDataStr = JSON.stringify(JSON.parse(this.storedDataStr))
+        this.storedDataStr = JSON.stringify(JSON.parse(this.storedDataStr));
       }
     },
     // 下载存储的数据（注意是直接从storage中获取的，若不是文本框显示的数据）
@@ -86,9 +103,9 @@ new Vue({
                 btn.func();
               }
             }
-          }, btn.title)
+          }, btn.title);
         } : null
-      })
+      });
     },
     /**
      * 在options.html、popup.html等弹出对话框
@@ -117,11 +134,11 @@ new Vue({
         onCancel() {
           onCancel && typeof onOK === "function" ? onCancel() : null;
         }
-      })
+      });
     }
   },
   mounted() {
     // 初始化
-    this.init()
+    this.init();
   }
-})
+});

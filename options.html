@@ -4,25 +4,33 @@
   <meta charset="UTF-8">
   <title>备份与恢复 - Auto Mark</title>
   <link rel="stylesheet" type="text/css" href="css/antd.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/options.css">
 </head>
 <body>
-<div id="app" class="options">
-  <a-row type="flex" class="c-row" justify="space-between">
-    <strong>chrome storage存储的数据</strong>
-    <a-button type="default" @click="window.open('README.md','_blank')" size="small">说明
-    </a-button>
-  </a-row>
-  <a-row type="flex" class="c-row" justify="space-between">
-    <a-textarea id="urls-prefix" v-model="storedDataStr" rows="15"
-                placeholder="http://www.runoob.com/javascript"/>
-  </a-row>
-  <a-row>
-    <a-button type="primary" @click="loadStorage">导入输入框的数据</a-button>
-    <a-button type="primary" @click="downStorage">保存数据到本地</a-button>
-    <a-button type="danger" @click="clearStorage">清空存储的数据</a-button>
-    <a-switch @change="formatDataStr" size="small"></a-switch>
-  </a-row>
+<div id="app">
+  <a-card title="收藏的网址前缀" size="small">
+    <div v-for="urlPre in urlsPre" :key="urlPre.url_pre" class="do-urlpre">
+      <span class="do-urlpre-url" :title="urlPre.added">{{urlPre.url_pre}}</span>
+      <a-button icon="close-circle" shape="circle" size="small" title="移除"
+                @click="removeURLPre(urlPre.url_pre)"></a-button>
+    </div>
+  </a-card>
+
+  <a-card title="存储的数据" size="small">
+    <div slot="extra">
+      <a-button type="default" @click="window.open('README.md','_blank')" size="small">说明</a-button>
+    </div>
+    <div class="do-storage">
+      <div class="do-row">
+        <a-button type="primary" size="small" @click="loadStorage">导入数据</a-button>
+        <a-button type="primary" size="small" @click="downStorage">下载数据</a-button>
+        <a-button type="danger" size="small" @click="clearStorage">清空存储的数据</a-button>
+        <a-switch @change="formatDataStr"></a-switch>
+      </div>
+      <a-textarea id="urls-prefix" v-model="storedDataStr" rows="15"
+                  placeholder="http://www.runoob.com/javascript"/>
+    </div>
+  </a-card>
 </div>
 <script src="js/vue.min.js"></script>
 <script src="js/antd.min.js"></script>
