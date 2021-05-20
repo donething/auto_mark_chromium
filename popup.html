@@ -7,16 +7,12 @@
   <link rel="stylesheet" type="text/css" href="css/popup.css">
 </head>
 <body>
-<div id="app" class="popup">
-  <a-row type="flex" class="do-row" justify="space-between">
-    <span><strong>添加网址前缀</strong></span>
-  </a-row>
-  <a-row type="flex" class="do-row" justify="space-between">
-    <a-button @click="chrome.runtime.openOptionsPage()" type="primary"
-              size="small">查看已添加
-    </a-button>
-    <a-button @click="sendMsgAddURLPre" type="primary" size="small">添加</a-button>
-  </a-row>
+<div id="app">
+  <h4>添加网址前缀</h4>
+  <div class="do-row do-justify-between do-width-100per do-margin-v-5">
+    <a-button type="default" size="small" @click="chrome.runtime.openOptionsPage()">管理已添加</a-button>
+    <a-button type="primary" size="small" @click="sendMsgAddURLPre">添加</a-button>
+  </div>
   <a-row type="flex" class="do-row" justify="space-between">
     <a-textarea id="url-prefix" v-model="urlPre" rows="5"
                 placeholder="https://www.runoob.com/js"/>

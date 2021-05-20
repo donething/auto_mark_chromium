@@ -7,28 +7,33 @@
   <link rel="stylesheet" type="text/css" href="css/options.css">
 </head>
 <body>
-<div id="app">
-  <a-card title="收藏的网址前缀" size="small">
-    <div v-for="urlPre in urlsPre" :key="urlPre.url_pre" class="do-urlpre">
-      <span class="do-urlpre-url" :title="urlPre.added">{{urlPre.url_pre}}</span>
-      <a-button icon="close-circle" shape="circle" size="small" title="移除"
-                @click="removeURLPre(urlPre.url_pre)"></a-button>
-    </div>
+<div id="app" class="do-row do-justify-center">
+  <a-card title="收藏的网址前缀" size="small" class="do-card">
+    <ul>
+      <li v-for="urlPre in urlsPre" :key="urlPre.url_pre" class="do-row do-justify-between">
+        <a :href="urlPre.url_pre" :title="urlPre.added" class="do-urlpre-url" target="_blank">
+          {{urlPre.url_pre}}
+        </a>
+        <a-button title="移除" icon="close-circle" shape="circle" size="small"
+                  @click="removeURLPre(urlPre.url_pre)">
+        </a-button>
+      </li>
+    </ul>
   </a-card>
 
-  <a-card title="存储的数据" size="small">
+  <a-card title="存储的数据" size="small" class="do-card">
     <div slot="extra">
       <a-button type="default" @click="window.open('README.md','_blank')" size="small">说明</a-button>
     </div>
-    <div class="do-storage">
-      <div class="do-row">
+    <div class="do-col do-storage">
+      <div class="do-row do-justify-between do-align-center do-width-100per do-sub-margin-h-5">
         <a-button type="primary" size="small" @click="loadStorage">导入数据</a-button>
         <a-button type="primary" size="small" @click="downStorage">下载数据</a-button>
-        <a-button type="danger" size="small" @click="clearStorage">清空存储的数据</a-button>
-        <a-switch @change="formatDataStr"></a-switch>
+        <a-button type="danger" size="small" @click="clearStorage">清空数据</a-button>
+        <a-switch @change="formatDataStr" title="格式化" size="small"></a-switch>
       </div>
-      <a-textarea id="urls-prefix" v-model="storedDataStr" rows="15"
-                  placeholder="http://www.runoob.com/javascript"/>
+      <a-textarea v-model="storedDataStr" rows="20" class="do-margin-top-5"
+                  placeholder="https://www.runoob.com/javascript"/>
     </div>
   </a-card>
 </div>

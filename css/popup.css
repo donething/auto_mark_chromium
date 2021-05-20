@@ -1,8 +1,23 @@
 .do-row {
-    padding: 6px 5px;
-    border: 0 solid #eee;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.popup {
-    width: 280px;
+.do-justify-between {
+  justify-content: space-between !important;
+}
+
+.do-margin-v-5 {
+  margin: 5px 0;
+}
+
+.do-width-100per {
+  width: 100%;
+}
+
+#app {
+  padding: 5px;
+  width: 300px;
 }

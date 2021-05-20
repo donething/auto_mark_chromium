@@ -1,34 +1,90 @@
 body {
-    color: #555;
-    background: #F8F8F5;
+  color: #555;
+  background: #F8F8F5;
+}
+
+/* 链接 */
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+a:hover {
+  color: #40a9ff;
+}
+
+/* 列表：不使用默认的边距、样式 */
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.do-card {
+  width: 450px;
+  height: 100vh;
+}
+
+.do-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.do-col {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.do-justify-between {
+  justify-content: space-between !important;
+}
+
+.do-justify-center {
+  justify-content: center;
+}
+
+.do-align-center {
+  align-items: center;
+}
+
+.do-width-100per {
+  width: 100%;
+}
+
+.do-margin-v-5 {
+  margin: 5px 0;
+}
+
+.do-margin-h-5 {
+  margin: 0 5px;
+}
+
+.do-margin-top-5 {
+  margin-top: 5px;
+}
+
+.do-sub-margin-h-5 * {
+  margin: 0 5px;
 }
 
 #app {
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.do-urlpre {
-    display: flex;
-    flex-flow: row nowrap;
-    align-content: space-between;
+  height: 100vh;
 }
 
 /* 网址前缀，太长的省略 */
 .do-urlpre-url {
-    display: inline-block;
-    width: 300px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  display: inline-block;
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .do-storage {
-    display: flex;
-    flex-flow: column nowrap;
-}
-
-.do-row {
-    display: flex;
-    flex-flow: row nowrap;
+  display: flex;
+  flex-flow: column nowrap;
 }
