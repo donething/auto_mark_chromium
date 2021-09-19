@@ -18,7 +18,8 @@
       "js/utils.js",
       "js/bookmark.js",
       "js/background.js"
-    ]
+    ],
+    "persistent": false
   },
   "permissions": [
     "bookmarks",
