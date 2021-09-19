@@ -6,10 +6,10 @@ class Utils {
     // 格式：urls_pre:[{url_pre:"",added:"2020-1-1 10:10"}]
     URLsPrefix: [],
     get(obj, callback) {
-      chrome.storage.sync.get(obj, callback)
+      chrome.storage.sync.get(obj, callback);
     },
     set(obj, callback) {
-      chrome.storage.sync.set(obj, callback)
+      chrome.storage.sync.set(obj, callback);
     },
     // 清空chromium storage存储的本扩展的所有数据
     clear(callback) {
@@ -20,9 +20,9 @@ class Utils {
       return {
         url_pre: url,
         added: new Date().toLocaleString('chinese', {hour12: false})
-      }
+      };
     }
-  }
+  };
 
   // 弹出通知
   static notify(title, content, timeout = 3000) {
@@ -31,11 +31,11 @@ class Utils {
       title: `Auto Mark ${title}`,
       message: content,
       iconUrl: chrome.extension.getURL("icons/bookmark_32.png")
-    }
+    };
     chrome.notifications.create("", notificationOptions, id => {
       setTimeout(() => {
-        chrome.notifications.clear(id)
-      }, timeout)
-    })
+        chrome.notifications.clear(id);
+      }, timeout);
+    });
   }
 }
