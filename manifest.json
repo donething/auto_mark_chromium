@@ -19,7 +19,7 @@
       "js/bookmark.js",
       "js/background.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "permissions": [
     "bookmarks",
