@@ -54,7 +54,7 @@ new Vue({
     downStorage() {
       Utils.Storage.get(null, result => {
         let eleLink = document.createElement('a');
-        eleLink.download = "automark_chromium.json";
+        eleLink.download = "chromium_automark.json";
         eleLink.style.display = 'none';
         let content = JSON.stringify(result);
         // 字符内容转变成blob地址
